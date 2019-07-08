@@ -147,6 +147,36 @@ number of events -> time to completion
 - 500000 -> 4 minutes 20 seconds
 - 1000000 -> 12 minutes
 
+####Tests
+
+I created four tests to demonstrate the correctness of the solution.
+
+The same approach was used for reading the input files and then obtaining the moving 
+averages with the Moving Average class.
+We then compare these values against the ground truth, on the tests/output folder.
+
+Besides testing for correctness, it was also important to consider the two edge cases
+where the starting time could output wrong values. These cases are shown in test 2 and 3,
+which test the lower and upper bound for the time interval.
+
+- Test 1
+    - 5 events
+    - window 50
+    
+- Test 2
+    - 5 events
+    - window 20
+    - start time 12:59:59.999999
+
+- Test 3
+    - 7 events
+    - window 30
+    - start time 00:00:00.000000
+
+- Test 4
+    - 7 events
+    - window 5
+
 
 ### Considerations
 
@@ -173,13 +203,17 @@ The client has two python files.
 
 Argument options:
 
-    -f, --file 'path/to/input/file': path to the input file (required)
-    -w, --window 'int': window size to analyse (required)
+    -f, --file 'path/to/input/file': path to the input file (default 'inputs/example.json')
+    -w, --window 'int': window size to analyse (default 10)
     -p, --print: enable console output
-    -o, --output_file 'path/to/output/file' : path to the output file, where to save the results (default is outputs/input_name.json)
+    -o, --output_file 'path/to/output/file': path to the output file, where to save the results (default is outputs/input_name.json)
+    -t, --test: run tests
 
     example:
-    python challenge.py -f inputs/1000.json -w 25 -p -o outputs/1000_out.json
+    python client.py -f inputs/1000.json -w 25 -p -o outputs/1000_out.json
+    
+    run tests:
+    python client.py -t
 
 
 ####Generator

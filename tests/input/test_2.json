@@ -1,0 +1,5 @@
+{"timestamp": "2019-07-08 12:59:59.999999", "translation_id": "5aa5b2f39f7254a75aa5", "source_language": "en","target_language": "fr","client_name": "easyjet","event_name":"translation_delivered","nr_words": 30, "duration": 26}
+{"timestamp": "2019-07-08 13:05:55.999999", "translation_id": "5aa5b2f39f7254a75aa5", "source_language": "en","target_language": "fr","client_name": "easyjet","event_name":"translation_delivered","nr_words": 30, "duration": 68}
+{"timestamp": "2019-07-08 13:15:17.999999", "translation_id": "5aa5b2f39f7254a75aa5", "source_language": "en","target_language": "fr","client_name": "easyjet","event_name":"translation_delivered","nr_words": 30, "duration": 68}
+{"timestamp": "2019-07-08 13:21:04.999999", "translation_id": "5aa5b2f39f7254a75aa5", "source_language": "en","target_language": "fr","client_name": "easyjet","event_name":"translation_delivered","nr_words": 30, "duration": 36}
+{"timestamp": "2019-07-08 13:30:16.999999", "translation_id": "5aa5b2f39f7254a75aa5", "source_language": "en","target_language": "fr","client_name": "easyjet","event_name":"translation_delivered","nr_words": 30, "duration": 62}

@@ -5,8 +5,8 @@ class MovingAverage:
     Implements the moving average algorithm
 
     Has only two attributes
-    - events - array of events
-    - window_size - size of the window to analyse
+    - events: array of events
+    - window_size: size of the window to analyse
     """
 
     def __init__(self, events, window_size):

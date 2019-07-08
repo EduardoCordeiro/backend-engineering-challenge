@@ -21,9 +21,9 @@ def main():
 
     args = parser.parse_args()
 
-    f = open(f"inputs/{args.events}.json", "a")
+    f = open(f"tests/test_1.json", "a")
 
-    string_time = "2018-12-26 18:11:08.509654"
+    string_time = "2019-07-08 10:40:00.423123"
 
     current_time = datetime.datetime.strptime(string_time, '%Y-%m-%d %H:%M:%S.%f')
 
