@@ -86,3 +86,115 @@ Good luck and may the force be with you
 
 If you feeling creative feel free to consider any additional cases you might find interesting. Remember this is a bonus, focus on delivering the solution first.
 
+### Solution
+
+The following pseudo-code shows the main algorithm used.
+My approach involves a modified version of the bisect_right implementation, that compares
+the timestamps of the events.
+
+During the main loop the index of the right-most event, which has a timestamp lower than the current_time is returned.
+This means that we have all events in a range from 0 to 'i'. Since we are only interested in events during a certain window,
+we remove all events that have already been calculated and are now outside the window.
+Afterwards, all that is left is to calculate that average of the current events and saving them in a list for output.
+The loop finishes after adding one minute to the current time.
+
+````
+MovingAverage()
+    average_times = []
+    current_time = start_time
+    end_time = end_time
+    
+    while current_time < end_time
+    
+        i = binarySearch(current_time)
+        
+        current_events = events[0:i]
+        
+        removeOldEvents()
+        
+        average_time = calculateAverage(current_events)
+        
+        average_times.add(average_time)
+        
+        current_time += 1 minute
+````
+
+Time Complexity
+
+n = number of events
+t = number of minutes between end_time and current_time
+c = number of events currently being processed
+
+Outer loop is `O(t)` in all scenarios, as we need to iterate over all the minutes
+
+Binary search during each loop is `O(log n)`, for the worst and average case,`O(1)` in the best case
+
+Event removal during each loop is `O(c)`, where c is <= n.
+
+------------------------TODO-------------------------------
+Average case: `O(t log n)`
+
+Worst case: `O(t log n)`
+
+Benchmark on the examples generated locally (files were too big to upload to git)
+window size = 10
+
+number of events -> time to completion
+- 1000 -> 0.02 seconds
+- 10000 -> 0.2 seconds
+- 100000 -> 3.3 seconds
+- 500000 -> 4 minutes 20 seconds
+- 1000000 -> 12 minutes
+
+
+### Considerations
+
+There are a couple of points that can be considered to speed up the application, depending on requirements.
+
+For instance, we are reading a collection of values from the input file but only using two of its fields.
+We could save space by only storing those two values.
+
+In the example given the different events are spaced only minutes apart. It would also be important to consider
+what happens when the event space is more sparse.
+
+Besides the current input correctness checks that I made, some assumptions had to be made to obtain a correct result.
+
+One of this assumptions was the window size, as it was not given what values can it be. 
+Does it always refer to minutes? Or on sparser datasets it can refer to hours or days
+
+
+Developed on Python 3.7, using only standard libraries.
+No build required, run example shown below.
+
+####Client
+
+The client has two python files.
+
+- client.py - main, argument parsing and input/output logic
+
+- MovingAverage.py - implements the algorithm and additional utility functions
+
+Argument options:
+
+    -f, --file 'path/to/input/file': path to the input file (required)
+    -w, --window 'int': window size to analyse (required)
+    -p, --print: enable console output
+    -o, --output_file 'path/to/output/file' : path to the output file, where to save the results (default is outputs/input_name.json)
+
+example:
+
+    python challenge.py -f inputs/1000.json -w 25 -p -o outputs/1000_out.json
+
+
+####Generator
+
+Simple generator for input files to this challenge, with a simple command line interface.
+
+    -t, --time 'YYYY-MM-DD HH:MM:SS.ssssss': start time
+    -bd, --min_duration 'int': minimum duration (default = 25)
+    -td, --max_duration 'int': maximum duration (default = 70)
+    -e, --events 'int': number of events to generate (default = 1000)    
+    
+example:
+
+    python generator.py -t "2018-12-26 18:11:08.509654" -bd 10 -td 100 -e 4000
