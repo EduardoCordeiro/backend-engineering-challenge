@@ -119,22 +119,23 @@ MovingAverage()
         current_time += 1 minute
 ````
 
-Time Complexity
+####Time Complexity
 
-n = number of events
-t = number of minutes between end_time and current_time
-c = number of events currently being processed
+- n = number of events
+- t = number of minutes between end_time and current_time
+- c = number of events currently being processed
 
 Outer loop is `O(t)` in all scenarios, as we need to iterate over all the minutes
 
-Binary search during each loop is `O(log n)`, for the worst and average case,`O(1)` in the best case
+Binary search during each loop is `O(log n)`, for the worst and average case
 
 Event removal during each loop is `O(c)`, where c is <= n.
 
-------------------------TODO-------------------------------
-Average case: `O(t log n)`
+Average case: `O(t c)`
 
-Worst case: `O(t log n)`
+Best case: `O(t log n)`
+
+####Benchmarks
 
 Benchmark on the examples generated locally (files were too big to upload to git)
 window size = 10
@@ -151,7 +152,7 @@ number of events -> time to completion
 
 There are a couple of points that can be considered to speed up the application, depending on requirements.
 
-For instance, we are reading a collection of values from the input file but only using two of its fields.
+For instance, we are reading several values from the input file, but only using two fields.
 We could save space by only storing those two values.
 
 In the example given the different events are spaced only minutes apart. It would also be important to consider
@@ -159,12 +160,8 @@ what happens when the event space is more sparse.
 
 Besides the current input correctness checks that I made, some assumptions had to be made to obtain a correct result.
 
-One of this assumptions was the window size, as it was not given what values can it be. 
-Does it always refer to minutes? Or on sparser datasets it can refer to hours or days
-
-
-Developed on Python 3.7, using only standard libraries.
-No build required, run example shown below.
+One of this assumptions was the window size, as it was not given what it could be. 
+Does it always refer to minutes? Or on sparser datasets it can refer to hours or even days.
 
 ####Client
 
@@ -181,20 +178,21 @@ Argument options:
     -p, --print: enable console output
     -o, --output_file 'path/to/output/file' : path to the output file, where to save the results (default is outputs/input_name.json)
 
-example:
-
+    example:
     python challenge.py -f inputs/1000.json -w 25 -p -o outputs/1000_out.json
 
 
 ####Generator
 
-Simple generator for input files to this challenge, with a simple command line interface.
+I created a very simple generator for input files to this challenge, with a command line interface.
 
     -t, --time 'YYYY-MM-DD HH:MM:SS.ssssss': start time
     -bd, --min_duration 'int': minimum duration (default = 25)
     -td, --max_duration 'int': maximum duration (default = 70)
     -e, --events 'int': number of events to generate (default = 1000)    
     
-example:
-
+    example:
     python generator.py -t "2018-12-26 18:11:08.509654" -bd 10 -td 100 -e 4000
+    
+Developed on Python 3.7, using only standard libraries.
+No build required, run example shown below.

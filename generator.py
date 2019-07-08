@@ -21,7 +21,7 @@ def main():
 
     args = parser.parse_args()
 
-    f = open(f"inputs/{args.events}.json", "a+")
+    f = open(f"inputs/{args.events}.json", "a")
 
     string_time = "2018-12-26 18:11:08.509654"
 
