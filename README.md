@@ -119,7 +119,7 @@ MovingAverage()
         current_time += 1 minute
 ````
 
-####Time Complexity
+#### Time Complexity
 
 - n = number of events
 - t = number of minutes between end_time and current_time
@@ -135,21 +135,19 @@ Average case: `O(t c)`
 
 Best case: `O(t log n)`
 
-####Benchmarks
+#### Benchmarks
 
 Benchmark on the examples generated locally (files were too big to upload to git)
 window size = 10
 
 number of events -> time to completion
-- 1000 -> 0.02 seconds
-- 10000 -> 0.2 seconds
-- 100000 -> 3.3 seconds
-- 500000 -> 4 minutes 20 seconds
-- 1000000 -> 12 minutes
+- 1.000 -> 0.02 seconds
+- 10.000 -> 0.2 seconds
+- 100.000 -> 3.3 seconds
 
-####Tests
+#### Tests
 
-I created four tests to demonstrate the correctness of the solution.
+I created four tests to demonstrate the correctness of the solution. (Testing.py)
 
 The same approach was used for reading the input files and then obtaining the moving 
 averages with the Moving Average class.
@@ -193,15 +191,16 @@ Besides the current input correctness checks that I made, some assumptions had t
 One of this assumptions was the window size, as it was not given what it could be. 
 Does it always refer to minutes? Or on sparser datasets it can refer to hours or even days.
 
-####Client
+#### Client
 
-The client has two python files.
+The client has three python files.
 
-- client.py - main, argument parsing and input/output logic
+- client.py - main, argument parsing
+
+- utility.py - input and output logging
 
 - MovingAverage.py - implements the algorithm and additional utility functions
 
-Argument options:
 
     -f, --file 'path/to/input/file': path to the input file (default 'inputs/example.json')
     -w, --window 'int': window size to analyse (default 10)
@@ -216,7 +215,7 @@ Argument options:
     python client.py -t
 
 
-####Generator
+#### Generator
 
 I created a very simple generator for input files to this challenge, with a command line interface.
 
@@ -227,6 +226,7 @@ I created a very simple generator for input files to this challenge, with a comm
     
     example:
     python generator.py -t "2018-12-26 18:11:08.509654" -bd 10 -td 100 -e 4000
+    
     
 Developed on Python 3.7, using only standard libraries.
 No build required, run example shown below.
